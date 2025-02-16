@@ -21,6 +21,7 @@ import { useMaterialUIController, setMiniSidenav, setOpenConfigurator } from "co
 
 // Routes
 import routes from "routes";
+import ReplyPage from "layouts/Reply";
 import brandWhite from "assets/images/logo-ct.png";
 import brandDark from "assets/images/logo-ct-dark.png";
 
@@ -118,6 +119,7 @@ export default function App() {
       <Routes>
         {renderRoutes(routes)}
         <Route path="*" element={<Navigate to="/dashboard" />} />
+        <Route path="/reply/:queryId" element={<ReplyPage />} />
       </Routes>
     </ThemeProvider>
   );
