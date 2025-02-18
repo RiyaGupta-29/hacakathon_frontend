@@ -21,6 +21,7 @@ import Projects from "layouts/dashboard/components/Projects";
 import OrdersOverview from "layouts/dashboard/components/OrdersOverview";
 
 function Dashboard() {
+  const username = localStorage.getItem("USERNAME") || "DEFAULT_USER";
   const { sales, tasks } = reportsLineChartData;
 
   return (
@@ -91,51 +92,57 @@ function Dashboard() {
         <MDBox mt={4.5}>
           <Grid container spacing={3}>
             <Grid item xs={12} md={6} lg={4}>
-              <MDBox mb={3}>
-                <ReportsBarChart
-                  color="info"
-                  title="Query Volume Trend"
-                  description="Analysis of daily received queries"
-                  date="Updated 2 days ago"
-                  chart={reportsBarChartData}
-                />
-              </MDBox>
+              {username !== "USER" && (
+                <MDBox mb={3}>
+                  <ReportsBarChart
+                    color="info"
+                    title="Query Volume Trend"
+                    description="Analysis of daily received queries"
+                    date="Updated 2 days ago"
+                    chart={reportsBarChartData}
+                  />
+                </MDBox>
+              )}
             </Grid>
             <Grid item xs={12} md={6} lg={4}>
-              <MDBox mb={3}>
-                <ReportsLineChart
-                  color="success"
-                  title="Average Response Time"
-                  description={
-                    <>
-                      (<strong>5%</strong>) faster responses today.
-                    </>
-                  }
-                  date="Updated 4 min ago"
-                  chart={sales}
-                />
-              </MDBox>
+              {username !== "USER" && (
+                <MDBox mb={3}>
+                  <ReportsLineChart
+                    color="success"
+                    title="Average Response Time"
+                    description={
+                      <>
+                        (<strong>5%</strong>) faster responses today.
+                      </>
+                    }
+                    date="Updated 4 min ago"
+                    chart={sales}
+                  />
+                </MDBox>
+              )}
             </Grid>
             <Grid item xs={12} md={6} lg={4}>
-              <MDBox mb={3}>
-                <ReportsLineChart
-                  color="dark"
-                  title="Query Resolution Rate"
-                  description="Resolution performance over time"
-                  date="Just updated"
-                  chart={tasks}
-                />
-              </MDBox>
+              {username !== "USER" && (
+                <MDBox mb={3}>
+                  <ReportsLineChart
+                    color="dark"
+                    title="Query Resolution Rate"
+                    description="Resolution performance over time"
+                    date="Just updated"
+                    chart={tasks}
+                  />
+                </MDBox>
+              )}
             </Grid>
           </Grid>
         </MDBox>
         <MDBox>
           <Grid container spacing={3}>
             <Grid item xs={12} md={6} lg={8}>
-              <Projects />
+              {username !== "ADMIN" && <Projects />}
             </Grid>
             <Grid item xs={12} md={6} lg={4}>
-              <OrdersOverview />
+              {username !== "ADMIN" && <OrdersOverview />}
             </Grid>
           </Grid>
         </MDBox>
